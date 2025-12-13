@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package monitor.v1;
 
-option go_package = "github.com/pulse-check/pulse-check-apis/monitor/v1";
+option go_package = "github.com/impruthvi/pulse-check-apis/monitor/v1";
 
 service MonitorService {
 
