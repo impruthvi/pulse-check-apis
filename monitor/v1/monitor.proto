@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package monitor.v1;
+
+option go_package = "github.com/pulse-check/pulse-check-apis/monitor/v1";
+
+service MonitorService {
+
+    // CreateMonitor API to register a new URL for monitoring
+    // Permission: internal / authenticated system
+    rpc CreateMonitor(CreateMonitorRequest) returns (CreateMonitorResponse);
+
+    // GetMonitor API to get current status of a monitored URL
+    // Permission: internal / authenticated system
+    rpc GetMonitor(GetMonitorRequest) returns (GetMonitorResponse);
+}
+
+// Monitor model
+message Monitor {
+    string id = 1;
+    string url = 2;
+    int32 interval_seconds = 3;
+    string status = 4;           // UP / DOWN
+    int64 last_checked_at = 5;   // unix timestamp
+    int64 response_time_ms = 6;
+}
+
+// CreateMonitor request API
+message CreateMonitorRequest {
+    string url = 1;
+    int32 interval_seconds = 2;
+}
+
+// CreateMonitor response API
+message CreateMonitorResponse {
+    Monitor monitor = 1;
+}
+
+// GetMonitor request API
+message GetMonitorRequest {
+    string id = 1;
+}
+
+// GetMonitor response API
+message GetMonitorResponse {
+    Monitor monitor = 1;
+}

@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package checker.v1;
+
+option go_package = "github.com/impruthvi/pulse-check-apis/checker/v1";
+
+service CheckerService {
+    // CheckURL API to check health of a URL
+    rpc CheckURL(CheckURLRequest) returns (CheckURLResponse);
+}
+
+// CheckURL request
+message CheckURLRequest {
+    string monitor_id = 1;
+    string url = 2;
+}
+
+// CheckURL response
+message CheckURLResponse {
+    string monitor_id = 1;
+    string status = 2;          // UP / DOWN
+    int64 response_time_ms = 3;
+    int64 checked_at = 4;       // unix timestamp
+}
